@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capgemini.storeserver.beans.Coupon;
 import com.capgemini.storeserver.beans.Merchant;
 import com.capgemini.storeserver.services.AdminServices;
 
@@ -21,6 +22,12 @@ public class AdminActionController {
 	public void addMerchant(@RequestBody Merchant merchant) {
 		
 		adminService.addMerchant(merchant);
+	}
+	
+	@RequestMapping(value="/addCoupon", method=RequestMethod.POST)
+	public void addCoupon(@RequestBody Coupon coupon) {
+		
+		adminService.addCoupon(coupon);
 	}
 	
 }
