@@ -47,4 +47,10 @@ public class AdminActionController {
 			@RequestParam("categoryName") String categoryName, @RequestParam("type") String type) {
 		adminService.updateCategory(categoryId, categoryName, type);
 	}
+	
+	
+	@RequestMapping( value="/removeDiscount", method=RequestMethod.GET)
+		public void removeDiscount(@RequestParam("discountId")int discountId)  {
+			adminService.removeDiscount(discountId);
+		}
 }

@@ -13,7 +13,9 @@ public interface AdminServices {
 	
 	public void removeMerchant(int id);
 	
-public List<Product> viewAllProducts();
+    public List<Product> viewAllProducts();
 	
-	Category updateCategory(int categoryId, String categoryName,String type);
+	public Category updateCategory(int categoryId, String categoryName,String type);
+	
+	public void removeDiscount(int discountId);
 }
