@@ -1,5 +1,7 @@
 package com.capgemini.storeserver.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,12 @@ public class AdminServicesImpl implements AdminServices {
 	public Merchant addMerchant(Merchant merchant) {
 		
 		return merchantRepo.save(merchant);
+	}
+	
+	@Override
+	public List<Merchant> viewAllMerchants() {
+	
+		return merchantRepo.findAll();
 	}
 	
 }
