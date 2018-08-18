@@ -23,4 +23,8 @@ public class AdminActionController {
 		adminService.addMerchant(merchant);
 	}
 	
+	@RequestMapping( value="/removeDiscount", method=RequestMethod.GET)
+	public void removeDiscount(int discountId)  {
+		adminService.removeDiscount(discountId);
+	}
 }
