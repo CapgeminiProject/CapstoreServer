@@ -101,7 +101,7 @@ public class MerchantActionController {
 		try {
 
 			Merchant merchant = merchantService.getMerchant(email);
-			String securityQuestion = merchant.getSecurityQuestion();
+			//String securityQuestion = merchant.getSecurityQuestion();
 			if(merchant.getSecurityAnswer().compareTo(securityAnswer) == 0) {
 				 return merchant.getPassword();
 			}

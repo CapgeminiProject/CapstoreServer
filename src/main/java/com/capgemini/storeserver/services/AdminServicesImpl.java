@@ -12,7 +12,6 @@ import com.capgemini.storeserver.beans.Customer;
 import com.capgemini.storeserver.beans.Discount;
 import com.capgemini.storeserver.beans.Merchant;
 import com.capgemini.storeserver.beans.Product;
-import com.capgemini.storeserver.repo.AdminRepo;
 import com.capgemini.storeserver.repo.CategoryRepo;
 import com.capgemini.storeserver.repo.CouponRepo;
 import com.capgemini.storeserver.repo.CustomerRepo;
@@ -23,8 +22,7 @@ import com.capgemini.storeserver.repo.ProductRepo;
 @Service(value="adminServices")
 public class AdminServicesImpl implements AdminServices {
 	
-	@Autowired
-	private AdminRepo adminRepo;
+
 
 	@Autowired
 	private MerchantRepo merchantRepo;

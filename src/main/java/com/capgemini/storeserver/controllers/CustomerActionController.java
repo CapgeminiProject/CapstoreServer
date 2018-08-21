@@ -22,7 +22,7 @@ import com.capgemini.storeserver.services.CustomerServices;
 @RestController
 public class CustomerActionController {
 
-	public Customer customer;
+	private Customer customer;
 
 	@Autowired
 	private CustomerServices customerService; 
@@ -41,7 +41,7 @@ public class CustomerActionController {
 			customer = customerService.customerSignIn(email, password);
 			
 		} catch (InvalidInputException e) {
-			e.printStackTrace();
+			
 			return null;
 		}
 		String name = customer.getCustomerName();
@@ -54,7 +54,7 @@ public class CustomerActionController {
 		try {
 			customer = customerService.getCustomerDetails(phoneNumber);
 		} catch (InvalidInputException e) {
-			e.printStackTrace();
+			
 			return null;
 		}
 		return  customer;
@@ -62,12 +62,12 @@ public class CustomerActionController {
 
 	// getAllProducts
 	@RequestMapping(value = "/getAllProducts")
-	public List getAllProductsFromDB() {
+	public List<Product> getAllProductsFromDB() {
 		List<Product> products = null;
 		try {
 			products = customerService.getAllProducts();
 		} catch (InvalidInputException e) {
-			e.printStackTrace();
+			
 			return null;
 		}
 		return  products;
@@ -79,7 +79,7 @@ public class CustomerActionController {
 		try {
 			product = customerService.getProductById(productId);
 		} catch (InvalidInputException e) {
-			e.printStackTrace();
+			
 			return null;
 		}
 		return  product;
@@ -91,7 +91,7 @@ public class CustomerActionController {
 		try {
 			products = customerService.getProductByCategory(category);
 		} catch (InvalidInputException e) {
-			e.printStackTrace();
+			
 			return null;
 		}
 		return  products;
@@ -103,7 +103,7 @@ public class CustomerActionController {
 		try {
 			status = customerService.getDeliveryStatus(orderId);
 		} catch (InvalidInputException e) {
-			e.printStackTrace();
+			
 			return null;
 		}
 		return  status;
@@ -127,7 +127,7 @@ public class CustomerActionController {
 		try {
 			return  customerService.updateSecurityAnswer(phoneNumber, securityAnswer);
 		} catch (InvalidInputException e) {
-			e.printStackTrace();
+			
 			return false;
 		}
 	}
@@ -211,7 +211,7 @@ public class CustomerActionController {
 		try {
 			customerService.setReviewMethod(phoneNumber, rating, comments, productId);
 		} catch (InvalidInputException e) {
-			e.printStackTrace();
+			
 		}
 	}
 

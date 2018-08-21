@@ -1,6 +1,5 @@
 package com.capgemini.storeserver.beans;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Product implements Serializable{
+public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int productId;
