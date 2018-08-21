@@ -114,7 +114,7 @@ public class CustomerServicesImpl implements CustomerServices {
 		product = productRepo.getOne(productId);
 
 		Discount discount = product.getDiscount();
-		
+
 		double price = product.getProductPrice();
 		double finalPrice = price;
 		if (discountIsValid(discount)) {
@@ -126,19 +126,18 @@ public class CustomerServicesImpl implements CustomerServices {
 	}
 
 	public boolean discountIsValid(Discount discount) {
-		
+
 		Date date2 = discount.getEndDateOfDiscount();
 		Date date1 = discount.getStartDateOfDiscount();
-		if (date1.before(new Date())) {
-			if (date2.after(new Date())) {
-				return true;
-			}
+		if (date1.before(new Date()) && date2.after(new Date())) {
+
+			return true;
 		}
 		return false;
 	}
 
 	@Override
-	
+
 	public double applyCoupon(int cartId) {
 		Cart cart = cartRepo.getOne(cartId);
 		Coupon coupon = cart.getCoupon();
@@ -155,10 +154,9 @@ public class CustomerServicesImpl implements CustomerServices {
 	public boolean couponIsValid(Coupon coupon) {
 		Date date2 = coupon.getCouponEndDate();
 		Date date1 = coupon.getCouponStartDate();
-		if (date1.before(new Date())) {
-			if (date2.after(new Date())) {
-				return true;
-			}
+		if (date1.before(new Date()) && date2.after(new Date())) {
+
+			return true;
 		}
 		return false;
 	}
@@ -167,14 +165,14 @@ public class CustomerServicesImpl implements CustomerServices {
 	public List<Product> getAllProductsFromCart(String phoneNumber) throws InvalidInputException {
 		Cart cart;
 
-		Customer customer = customerRepo.getOne(phoneNumber);
+		customer = customerRepo.getOne(phoneNumber);
 		cart = cartRepo.findByCustomer(customer);
 		return cart.getProducts();
 	}
 
 	@Override
 	public void buyNowProduct(int productId, String phoneNumber, int quantity) {
-		Product product = productRepo.getOne(productId);
+		product = productRepo.getOne(productId);
 		if (product.getProductQuantityAvailable() > quantity) {
 			product.setProductQuantityAvailable(product.getProductQuantityAvailable() - quantity);
 			product.setProductStatus(true);
@@ -183,7 +181,7 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	@Override
 	public void buyNowCart(String phoneNumber) throws ProductUnavailableException {
-		Customer customer = customerRepo.getOne(phoneNumber);
+		customer = customerRepo.getOne(phoneNumber);
 		Cart cart = cartRepo.findByCustomer(customer);
 		String error = "This quantity of the product is unavailable";
 		List<Product> products = cart.getProducts();
@@ -199,7 +197,7 @@ public class CustomerServicesImpl implements CustomerServices {
 	// gvk
 	@Override
 	public boolean updateSecurityQuestion(String phoneNumber, String securityQuestion) throws InvalidInputException {
-		Customer customer = customerRepo.getOne(phoneNumber);
+		customer = customerRepo.getOne(phoneNumber);
 		if (customer != null) {
 			if (customer.getSecurityQuestion().equals(securityQuestion)) {
 				return false;
@@ -214,7 +212,7 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	@Override
 	public boolean updateSecurityAnswer(String phoneNumber, String securityAnswer) throws InvalidInputException {
-		Customer customer = customerRepo.getOne(phoneNumber);
+		customer = customerRepo.getOne(phoneNumber);
 		if (customer != null) {
 			if (customer.getSecurityAnswer().equals(securityAnswer)) {
 				return false;
@@ -230,7 +228,7 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	@Override
 	public boolean updateCardNumber(String phoneNumber, String cardNumber) throws InvalidInputException {
-		Customer customer = customerRepo.getOne(phoneNumber);
+		customer = customerRepo.getOne(phoneNumber);
 		if (customer != null) {
 			if (customer.getCardNumber().equals(cardNumber)) {
 				return false;
@@ -245,7 +243,7 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	@Override
 	public boolean updateCustomerName(String phoneNumber, String customerName) throws InvalidInputException {
-		Customer customer = customerRepo.getOne(phoneNumber);
+		customer = customerRepo.getOne(phoneNumber);
 		if (customer != null) {
 			if (customer.getCustomerName().equals(customerName)) {
 				return false;
@@ -266,7 +264,7 @@ public class CustomerServicesImpl implements CustomerServices {
 	@Override
 	public Product searchByProductName(String productName) throws InvalidInputException {
 
-		Product product = productRepo.findByProductName(productName);
+		product = productRepo.findByProductName(productName);
 		if (product != null)
 			return product;
 		else
@@ -275,10 +273,10 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	@Override
 	public Customer customerSignIn(String email, String inputPassword) throws InvalidInputException {
-		Customer customer = customerRepo.findByEmail(email);
+		customer = customerRepo.findByEmail(email);
 		if (customer != null) {
 			String password = customer.getPassword();
-			
+
 			if (password.equals(inputPassword)) {
 				return customer;
 			} else {
@@ -291,7 +289,7 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	@Override
 	public Customer getCustomerDetails(String phoneNumber) throws InvalidInputException {
-		
+
 		return customerRepo.getOne(phoneNumber);
 	}
 
@@ -322,19 +320,19 @@ public class CustomerServicesImpl implements CustomerServices {
 	@Override
 	public void setReviewMethod(String phoneNumber, int rating, String comments, int productId)
 			throws InvalidInputException {
-		Review review = new Review();
+		review = new Review();
 		review.getProduct().setProductId(productId);
 		review.getCustomer().setPhoneNumber(phoneNumber);
 		review.setComments(comments);
 		review.setProductRating(rating);
 		// saving reviews in customer
-		Customer customer = customerRepo.getOne(phoneNumber);
+		customer = customerRepo.getOne(phoneNumber);
 		List<Review> customerReviewList = customer.getReviews();
 		customerReviewList.add(review);
 		customer.setReviews(customerReviewList);
 		customerRepo.save(customer);
 		// saving reviews in product
-		Product product = productRepo.getOne(productId);
+		product = productRepo.getOne(productId);
 		List<Review> productReviewList = product.getReview();
 		productReviewList.add(review);
 		product.setReview(productReviewList);
@@ -349,8 +347,8 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	@Override
 	public boolean addProductToWishlist(String phoneNumber, int productId) throws InvalidInputException {
-		Product product = productRepo.getOne(productId);
-		Customer customer = customerRepo.getOne(phoneNumber);
+		product = productRepo.getOne(productId);
+		customer = customerRepo.getOne(phoneNumber);
 		Wishlist wishlist = wishlistRepo.findByCustomer(customer);
 		if (wishlist == null) {
 			wishlist = new Wishlist();
@@ -374,8 +372,8 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	@Override
 	public boolean removeProductFromWishlist(String phoneNumber, int productId) throws InvalidInputException {
-		Product product = productRepo.getOne(productId);
-		Customer customer = customerRepo.getOne(phoneNumber);
+		product = productRepo.getOne(productId);
+		customer = customerRepo.getOne(phoneNumber);
 		Wishlist wishlist = wishlistRepo.findByCustomer(customer);
 		List<Product> productsList = wishlist.getProducts();
 		productsList.remove(product);
@@ -389,7 +387,7 @@ public class CustomerServicesImpl implements CustomerServices {
 	public List<Product> getWishlist(String phoneNumber) throws InvalidInputException {
 		Wishlist wishlist = new Wishlist();
 		try {
-			Customer customer = customerRepo.getOne(phoneNumber);
+			customer = customerRepo.getOne(phoneNumber);
 			wishlist = wishlistRepo.findByCustomer(customer);
 		} catch (Exception e) {
 			e.getMessage();
@@ -428,7 +426,7 @@ public class CustomerServicesImpl implements CustomerServices {
 	@Override
 	public Cart addProductToNewCart(String phoneNumber, int productId, int quantity)
 			throws ProductUnavailableException {
-		Product product = productRepo.getOne(productId);
+		product = productRepo.getOne(productId);
 		String error = "This quantity of the product is not available";
 		if (product.getProductQuantityAvailable() > quantity) {
 			Cart cart = new Cart();
@@ -447,16 +445,16 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	@Override
 	public Cart updateCart(String phoneNumber, int productId, int quantity) throws ProductUnavailableException {
-		Customer customer = customerRepo.getOne(phoneNumber);
-		
+		customer = customerRepo.getOne(phoneNumber);
+
 		Cart cart = cartRepo.findByCustomer(customer);
 		String error = "This quantity of the product is not Available";
-		
+
 		List<Product> products = cart.getProducts();
-		
+
 		int productIndex = products.indexOf(new Product(productId));
-		
-		Product product = products.get(productIndex);
+
+		product = products.get(productIndex);
 		if (product.getProductQuantityAvailable() > quantity) {
 			if (product.getCartQuantity() > quantity) {
 				double productPrice = product.getProductPrice();
@@ -481,21 +479,15 @@ public class CustomerServicesImpl implements CustomerServices {
 
 	@Override
 	public Cart removeProductFromCart(String phoneNumber, int productId) {
-		Customer customer = customerRepo.getOne(phoneNumber);
+		customer = customerRepo.getOne(phoneNumber);
 		Cart cart = cartRepo.findByCustomer(customer);
 		List<Product> products = cart.getProducts();
 		int productIndex = products.indexOf(new Product(productId));
-		// Product product= products.get(productIndex);
+		
 		products.remove(productIndex);
 		cart.setProducts(products);
 		return cartRepo.save(cart);
-		/*
-		 * if(product.getCartQuantity()==quantity) {
-		 * 
-		 * cart.setProducts(null); cart.setTotalAmount(totalAmount); return
-		 * cartRepo.save(cart); } else { cart.setTotalAmount(totalAmount);
-		 * cart.setProducts(products); return cartRepo.save(cart); }
-		 */
+		
 	}
 
 	@Override

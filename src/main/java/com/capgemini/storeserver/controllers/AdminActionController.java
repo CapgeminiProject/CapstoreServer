@@ -31,7 +31,7 @@ public class AdminActionController {
 
 	@RequestMapping(value = "/getAllMerchants", method = RequestMethod.GET)
 	public List<Merchant> getAllMerchant() {
-		List<Merchant> merch = adminService.viewAllMerchants();
+		
 
 		return adminService.viewAllMerchants();
 	}

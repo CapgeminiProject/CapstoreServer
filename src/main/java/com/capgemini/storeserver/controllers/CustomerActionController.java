@@ -209,12 +209,13 @@ public class CustomerActionController {
 
 
 	@RequestMapping(value= "/setReview")
-	public void setReview(String phoneNumber,int rating,String comments,int productId) {
+	public String setReview(String phoneNumber,int rating,String comments,int productId) {
 		try {
 			customerService.setReviewMethod(phoneNumber, rating, comments, productId);
 		} catch (InvalidInputException e) {
-			
+			return null;
 		}
+		return "review";
 	}
 
 	@RequestMapping(value= "/securityQuestion")
