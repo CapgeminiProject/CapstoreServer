@@ -62,7 +62,7 @@ public class AdminServicesImpl implements AdminServices {
 	
 	@Override
 	public List<Product> viewAllProducts() {
-		System.out.println(productRepo.findAll());
+		
 
 		return productRepo.findAll();
 	}

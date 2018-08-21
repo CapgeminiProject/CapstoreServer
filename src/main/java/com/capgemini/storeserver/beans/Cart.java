@@ -29,7 +29,7 @@ public class Cart {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "cart_products", joinColumns = { @JoinColumn(name = "cartId") }, inverseJoinColumns = {
 			@JoinColumn(name = "productId") })
-	private List<Product> products = new ArrayList<Product>();// many to many
+	private List<Product> products = new ArrayList<>();// many to many
 
 	public Cart() {
 		super();

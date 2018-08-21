@@ -19,7 +19,7 @@ public class Merchant {
 	private int merchantId;
 	private boolean isThirdPartyMerchant;
 	@OneToMany(mappedBy="merchant",cascade=CascadeType.ALL)
-	private List<Product> products = new ArrayList<Product>();
+	private List<Product> products = new ArrayList<>();
 	private Date addMerchantDate;
 	
 	private String password;

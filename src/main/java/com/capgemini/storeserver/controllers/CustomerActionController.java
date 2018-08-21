@@ -22,7 +22,7 @@ import com.capgemini.storeserver.services.CustomerServices;
 @RestController
 public class CustomerActionController {
 
-	private Customer customer;
+	
 
 	@Autowired
 	private CustomerServices customerService; 
@@ -37,6 +37,7 @@ public class CustomerActionController {
 	// CustomerSignIn
 	@RequestMapping(value = "/customerSignIn")
 	public ResponseEntity<String> customerSignIn(String email, String password) {
+		Customer customer=null;
 		try {
 			customer = customerService.customerSignIn(email, password);
 			
@@ -51,11 +52,12 @@ public class CustomerActionController {
 	// getCustomerDetails
 	@RequestMapping(value = "/getCustomerDetails")
 	public Customer getCustomerDetails(String phoneNumber) {
+		Customer customer=null;
 		try {
 			customer = customerService.getCustomerDetails(phoneNumber);
 		} catch (InvalidInputException e) {
 			
-			return null;
+			return customer;
 		}
 		return  customer;
 	}
@@ -68,7 +70,7 @@ public class CustomerActionController {
 			products = customerService.getAllProducts();
 		} catch (InvalidInputException e) {
 			
-			return null;
+			return products;
 		}
 		return  products;
 	}
@@ -80,7 +82,7 @@ public class CustomerActionController {
 			product = customerService.getProductById(productId);
 		} catch (InvalidInputException e) {
 			
-			return null;
+			return product;
 		}
 		return  product;
 	}
@@ -92,7 +94,7 @@ public class CustomerActionController {
 			products = customerService.getProductByCategory(category);
 		} catch (InvalidInputException e) {
 			
-			return null;
+			return products;
 		}
 		return  products;
 	}
@@ -104,7 +106,7 @@ public class CustomerActionController {
 			status = customerService.getDeliveryStatus(orderId);
 		} catch (InvalidInputException e) {
 			
-			return null;
+			return status;
 		}
 		return  status;
 	}
@@ -175,7 +177,7 @@ public class CustomerActionController {
 		try {
 			wishList = customerService.getWishlist(phoneNumber);
 		} catch (InvalidInputException e) {
-			return null;
+			return wishList;
 		}
 		
 		return wishList;
@@ -221,7 +223,7 @@ public class CustomerActionController {
 		try {
 			securityQuestion = customerService.securityQuestion(phoneNumber, securityAnswer);
 		} catch (InvalidInputException e) {
-			return null;
+			return securityQuestion;
 		}
 		
 		return securityQuestion;
@@ -239,7 +241,7 @@ public class CustomerActionController {
 		try {
 			forgotPassword=customerService.forgotPassword(phoneNumber);
 		} catch (CustomerNotFoundException e) {
-			return null;
+			return forgotPassword;
 		}
 		
 		return forgotPassword;
@@ -257,7 +259,7 @@ public class CustomerActionController {
 			cart= customerService.addProductToNewCart(phoneNumber, productId, quantity);
 		}
 		catch  (Exception e) {
-			return null;
+			return cart;
 		}
 		return cart;
 	}
@@ -267,7 +269,7 @@ public class CustomerActionController {
 		try {
 			cart = customerService.updateCart(phoneNumber, productId, quantity);
 		} catch (Exception e) {
-			return null;
+			return cart;
 		}
 		
 		return cart;
@@ -283,7 +285,7 @@ public class CustomerActionController {
 		try {
 			cartList = customerService.getAllProductsFromCart(phoneNumber);
 		} catch (InvalidInputException e) {
-			return null;
+			return cartList;
 		}
 		
 		return cartList;
@@ -294,7 +296,7 @@ public class CustomerActionController {
 		try {
 			val = customerService.changePassword(phoneNumber, newPassword);
 		} catch (InvalidInputException | CustomerNotFoundException e) {
-			return false;
+			return val;
 		}
 		
 		return val;
@@ -311,7 +313,7 @@ public class CustomerActionController {
 		try {
 			sortedList =  customerService.getProductsByPriceAsc(categoryName);
 		} catch (Exception e) {
-			return null;
+			return sortedList;
 		}
 		
 		return sortedList;
@@ -323,7 +325,7 @@ public class CustomerActionController {
 		try {
 			sortedList=customerService.getProductsByPriceDesc(categoryName);
 		} catch (Exception e) {
-			return null;
+			return sortedList;
 		}
 		
 		return sortedList;

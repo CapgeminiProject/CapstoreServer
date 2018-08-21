@@ -20,14 +20,14 @@ public class Orders {
 	private int orderId;
 	// changed
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	private List<Product> products = new ArrayList<Product>();// one to many
+	private List<Product> products = new ArrayList<>();// one to many
 	private int userId;
 	private double totalAmount;
 	private String deliveryStatus;// placed, shipped, out for delivery
 	private boolean statusOfTransaction; // Success or fail
 	private String modeOfPurchase;// can be COD, Online Purchase
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	private List<Merchant> merchant = new ArrayList<Merchant>();// one to many
+	private List<Merchant> merchant = new ArrayList<>();// one to many
 	private Date elligibleReturnDate;
 	private Date orderPlacedOn;
 	@ManyToOne

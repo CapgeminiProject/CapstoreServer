@@ -14,11 +14,11 @@ public class Admin {
 //	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int adminId;
 	@OneToMany(mappedBy="admin",cascade=CascadeType.ALL)
-	private List<Merchant> merchants = new ArrayList<Merchant>();// one to many
+	private List<Merchant> merchants = new ArrayList<>();// one to many
 	@OneToMany(mappedBy="admin",cascade=CascadeType.ALL)
-	private List<Coupon> coupons = new ArrayList<Coupon>();// one to many
+	private List<Coupon> coupons = new ArrayList<>();// one to many
 	@OneToMany(mappedBy="admin",cascade=CascadeType.ALL)
-	private List<Discount> discounts = new ArrayList<Discount>();// one to many
+	private List<Discount> discounts = new ArrayList<>();// one to many
 	private String username;
 	private String password;
 	

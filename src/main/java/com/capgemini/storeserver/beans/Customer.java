@@ -15,7 +15,7 @@ public class Customer {
 	private String phoneNumber;
 	// changed
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	private List<Address> address = new ArrayList<Address>();
+	private List<Address> address = new ArrayList<>();
 	@Column(unique = true)
 	private String email;
 	private String password;
@@ -23,9 +23,9 @@ public class Customer {
 	private String securityQuestion;
 	private String securityAnswer;
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	private List<Review> reviews = new ArrayList<Review>();// one to many
+	private List<Review> reviews = new ArrayList<>();// one to many
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	private List<Orders> orders = new ArrayList<Orders>();// one to many
+	private List<Orders> orders = new ArrayList<>();// one to many
 	private String customerName;
 
 	

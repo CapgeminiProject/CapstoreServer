@@ -18,9 +18,9 @@ public class Inventory {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int inventoryId;
 	@OneToMany(mappedBy="inventory",cascade=CascadeType.ALL)
-	private List<Product> products = new ArrayList<Product>();// one to many
+	private List<Product> products = new ArrayList<>();// one to many
 	@OneToMany(mappedBy="inventory",cascade=CascadeType.ALL)
-	private List<Category> category = new ArrayList<Category>();//one to many
+	private List<Category> category = new ArrayList<>();//one to many
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="merchantId")
 	private Merchant merchant;//one to one

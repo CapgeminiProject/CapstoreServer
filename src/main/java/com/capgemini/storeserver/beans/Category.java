@@ -18,7 +18,7 @@ public class Category {
 @GeneratedValue(strategy=GenerationType.AUTO)
 private int categoryId;
 @OneToMany(mappedBy="category",cascade=CascadeType.ALL)
-private List<Product> products = new ArrayList<Product>();// one to many
+private List<Product> products = new ArrayList<>();// one to many
 private String categoryName;//Clothes, books, gadgets
 private String type;		// shirts, pants, dresses in clothing
 @ManyToOne

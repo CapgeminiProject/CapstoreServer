@@ -21,96 +21,93 @@ import com.capgemini.storeserver.services.MerchantServices;
 public class MerchantActionController {
 
 	@Autowired
-	private MerchantServices merchantService; 
+	private MerchantServices merchantService;
 
-
-	@RequestMapping(value="/merchantSignIn",method=RequestMethod.POST)
+	@RequestMapping(value = "/merchantSignIn", method = RequestMethod.POST)
 	public void addMerchant(@RequestBody Merchant merchant) {
 
-		merchant = merchantService.registerMerchant(merchant);		
+		merchantService.registerMerchant(merchant);
 	}
 
-	@RequestMapping(value = "/addProduct",method=RequestMethod.POST)
-	public int addProduct(@RequestParam("merchantId") int merchantId,@RequestBody Product product) {
+	@RequestMapping(value = "/addProduct", method = RequestMethod.POST)
+	public int addProduct(@RequestParam("merchantId") int merchantId, @RequestBody Product product) {
 
 		Merchant merchant = new Merchant(merchantId);
-		int id=0;
+		int id = 0;
 		product.setMerchant(merchant);
 		try {
 			id = merchantService.addProduct(product);
 		} catch (ProductNotFoundException e) {
-			
+
+			return id;
 		}
 		return id;
 	}
 
-//
-//	@RequestMapping(value="addProduct", method=RequestMethod.POST)
-//	public void getAddProductPage(@RequestBody Product product) throws ProductNotFoundException {
-//
-//		merchantService.addProduct(product);
-//
-//	}
+	 	
 
 	@RequestMapping(value = "removeProduct")
 	public void removeProduct(int productId) {
 
 		merchantService.removeProduct(productId);
 	}
-	@RequestMapping(value ="updateProduct",method=RequestMethod.POST)
-	public Product updateProduct(@RequestBody Product product){
+
+	@RequestMapping(value = "updateProduct", method = RequestMethod.POST)
+	public Product updateProduct(@RequestBody Product product) {
 		try {
 			merchantService.updateProduct(product);
 		} catch (ProductNotFoundException e) {
-			
+
+			return null;
 		}
 		return product;
 	}
-	@RequestMapping(value="myProfilesuccess")
-	public Merchant myProfile( int merchantId ) {
+
+	@RequestMapping(value = "myProfilesuccess")
+	public Merchant myProfile(int merchantId) {
 		Merchant merchant = merchantService.findMerchantId(merchantId);
 		return merchant;
 	}
-	@RequestMapping(value = "getAllProducts", method=RequestMethod.GET)
-	public @ResponseBody List<Product> getAllProduct(@RequestParam("merchantId")int merchantId) {
-		
+
+	@RequestMapping(value = "getAllProducts", method = RequestMethod.GET)
+	public @ResponseBody List<Product> getAllProduct(@RequestParam("merchantId") int merchantId) {
+
 		List<Product> product = merchantService.getAllProducts(merchantId);
-		System.err.println(product);
+		
 		return product;
 	}
-	
+
 	@RequestMapping(value = "/getProductDetails")
-	public Product getProductDetails(@RequestParam("productId")int productId) {
-		
+	public Product getProductDetails(@RequestParam("productId") int productId) {
+
 		Product product = merchantService.getProductDetails(productId);
 		return product;
 	}
-	
-	
-	
-	@RequestMapping(value = "changePassword", method=RequestMethod.POST)
-	public void changePassword(@RequestParam("oldPassword") String oldPassword,@RequestParam("password") String password, @RequestParam("merchantId") int merchantId) {
+
+	@RequestMapping(value = "changePassword", method = RequestMethod.POST)
+	public void changePassword(@RequestParam("oldPassword") String oldPassword,
+			@RequestParam("password") String password, @RequestParam("merchantId") int merchantId) {
 		Merchant merchant = merchantService.findMerchantId(merchantId);
-		if(Base64Coder.decodeString(merchant.getPassword()).compareTo(oldPassword) != 0) {
+		if (Base64Coder.decodeString(merchant.getPassword()).compareTo(oldPassword) != 0) {
 			merchantService.changePassword(merchant, password);
 		}
 	}
-	
-	@RequestMapping(value = "forgotPassword",method=RequestMethod.GET)
-	public String forgotPassword(@RequestParam("email")String email,@RequestParam("securityAnswer")String securityAnswer) {
+
+	@RequestMapping(value = "forgotPassword", method = RequestMethod.GET)
+	public String forgotPassword(@RequestParam("email") String email,
+			@RequestParam("securityAnswer") String securityAnswer) {
 		try {
 
 			Merchant merchant = merchantService.getMerchant(email);
-			//String securityQuestion = merchant.getSecurityQuestion();
-			if(merchant.getSecurityAnswer().compareTo(securityAnswer) == 0) {
-				 return merchant.getPassword();
+			
+			if (merchant.getSecurityAnswer().compareTo(securityAnswer) == 0) {
+				return merchant.getPassword();
 			}
-		} 
-		catch (MerchantNotFoundException e) {
-			
+		} catch (MerchantNotFoundException e) {
+
 			return null;
-			
+
 		}
-		return "Password not found" ;
+		return "Password not found";
 	}
 }

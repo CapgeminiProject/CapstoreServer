@@ -20,7 +20,7 @@ public class Wishlist {
 	@JoinColumn(name="phoneNumber")
 	private Customer customer;// one to one
 	@OneToMany(mappedBy="wishlist",cascade=CascadeType.ALL)
-	private List<Product> products = new ArrayList<Product>();// one to many
+	private List<Product> products = new ArrayList<>();// one to many
 	
 	
 	public Wishlist() {

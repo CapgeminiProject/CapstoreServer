@@ -31,7 +31,7 @@ public class Product {
 	private double productPrice;
 	private int productQuantityAvailable;
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	private List<Review> review = new ArrayList<Review>();// one to many
+	private List<Review> review = new ArrayList<>();// one to many
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "discountId")
 	private Discount discount;// one to one
