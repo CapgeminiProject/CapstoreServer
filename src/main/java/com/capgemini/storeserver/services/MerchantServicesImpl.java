@@ -71,7 +71,7 @@ public class MerchantServicesImpl implements MerchantServices{
 	@Override
 	public Integer addProduct(Product product) throws ProductNotFoundException {
 		
-		try {
+		/*try {
 			if(productRepo.getOne(product.getProductId()) != null){
 				productRepo.delete(productRepo.getOne(product.getProductId()));
 				productRepo.save(product);
@@ -80,7 +80,7 @@ public class MerchantServicesImpl implements MerchantServices{
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		productRepo.save(product);
 		return new Integer(product.getProductId());
 	}
@@ -94,8 +94,8 @@ public class MerchantServicesImpl implements MerchantServices{
 
 	@Override
 	public void updateProduct(Product product) throws ProductNotFoundException {
-		if(productRepo.findById(product.getProductId())==null)
-			throw new ProductNotFoundException("product not found");
+		/*if(productRepo.findById(product.getProductId())==null)
+			throw new ProductNotFoundException("product not found");*/
 		productRepo.updateProduct(product.getProductId(), product.getProductName(), product.getBrand(), product.getProductQuantityAvailable(), product.getProductPrice(), product.getProductDesc(), product.isProductStatus());
 	}
 
