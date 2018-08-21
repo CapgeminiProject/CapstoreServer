@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
@@ -29,16 +30,18 @@ public class MerchantActionController {
 		merchant = merchantService.registerMerchant(merchant);		
 	}
 
-	@RequestMapping(value = "addProduct",method=RequestMethod.POST)
-	public void addProduct(@RequestParam("merchantId") int merchantId,@RequestBody Product product) {
+	@RequestMapping(value = "/addProduct",method=RequestMethod.POST)
+	public int addProduct(@RequestParam("merchantId") int merchantId,@RequestBody Product product) {
 
 		Merchant merchant = new Merchant(merchantId);
+		int id=0;
 		product.setMerchant(merchant);
 		try {
-			product = merchantService.addProduct(product);
+			id = merchantService.addProduct(product);
 		} catch (ProductNotFoundException e) {
 			e.printStackTrace();
 		}
+		return id;
 	}
 
 //
@@ -49,18 +52,19 @@ public class MerchantActionController {
 //
 //	}
 
-	@RequestMapping(value = "removedProduct")
+	@RequestMapping(value = "removeProduct")
 	public void removeProduct(int productId) {
 
 		merchantService.removeProduct(productId);
 	}
 	@RequestMapping(value ="updateProduct",method=RequestMethod.POST)
-	public void updateProduct(@RequestBody Product product){
+	public Product updateProduct(@RequestBody Product product){
 		try {
 			merchantService.updateProduct(product);
 		} catch (ProductNotFoundException e) {
 			e.printStackTrace();
 		}
+		return product;
 	}
 	@RequestMapping(value="myProfilesuccess")
 	public Merchant myProfile( int merchantId ) {
@@ -68,11 +72,21 @@ public class MerchantActionController {
 		return merchant;
 	}
 	@RequestMapping(value = "getAllProducts", method=RequestMethod.GET)
-	public List<Product> getAllProduct(@RequestParam("merchantId")int merchantId) {
+	public @ResponseBody List<Product> getAllProduct(@RequestParam("merchantId")int merchantId) {
 		
 		List<Product> product = merchantService.getAllProducts(merchantId);
+		System.err.println(product);
 		return product;
 	}
+	
+	@RequestMapping(value = "/getProductDetails")
+	public Product getProductDetails(@RequestParam("productId")int productId) {
+		
+		Product product = merchantService.getProductDetails(productId);
+		return product;
+	}
+	
+	
 	
 	@RequestMapping(value = "changePassword", method=RequestMethod.POST)
 	public void changePassword(@RequestParam("oldPassword") String oldPassword,@RequestParam("password") String password, @RequestParam("merchantId") int merchantId) {

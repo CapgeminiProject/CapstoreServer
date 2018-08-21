@@ -21,7 +21,7 @@ public Merchant registerMerchant(Merchant merchant);
 	
 	public void changePassword(Merchant merchant,String password);
 	
-	public Product addProduct(Product product) throws ProductNotFoundException;
+	public Integer addProduct(Product product) throws ProductNotFoundException;
 	
 	public List<Product> getAllProducts(int merchantId);
 	

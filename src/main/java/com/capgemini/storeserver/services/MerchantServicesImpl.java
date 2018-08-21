@@ -25,8 +25,9 @@ public class MerchantServicesImpl implements MerchantServices{
 	
 	@Override
 	public Merchant registerMerchant(Merchant merchant) {
-		System.out.println("from service  "+merchant.toString());
 		merchant.setAddMerchantDate(new Date());
+		String pwd = Base64Coder.encodeString(merchant.getPassword());
+		merchant.setPassword(pwd);
 		return merchantRepo.save(merchant);
 	}
 
@@ -68,8 +69,20 @@ public class MerchantServicesImpl implements MerchantServices{
 	}
 
 	@Override
-	public Product addProduct(Product product) throws ProductNotFoundException {
-		return productRepo.save(product);
+	public Integer addProduct(Product product) throws ProductNotFoundException {
+		
+		try {
+			if(productRepo.getOne(product.getProductId()) != null){
+				productRepo.delete(productRepo.getOne(product.getProductId()));
+				productRepo.save(product);
+				return new Integer(product.getProductId());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		productRepo.save(product);
+		return new Integer(product.getProductId());
 	}
 
 	@Override
@@ -88,7 +101,7 @@ public class MerchantServicesImpl implements MerchantServices{
 
 	@Override
 	public Product getProductDetails(int productId) {
-		return productRepo.getOne(productId);
+		return (Product)productRepo.getOne(productId);
 	}
 
 	@Override

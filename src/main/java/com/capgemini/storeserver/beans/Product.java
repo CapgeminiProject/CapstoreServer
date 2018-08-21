@@ -1,5 +1,6 @@
 package com.capgemini.storeserver.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,8 +17,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-public class Product {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Product implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int productId;
@@ -60,7 +64,7 @@ public class Product {
 	private Category category;
 	private int averageRating;
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "products")
 	private List<Cart> carts = new ArrayList<Cart>();
 
 	public Product() {
