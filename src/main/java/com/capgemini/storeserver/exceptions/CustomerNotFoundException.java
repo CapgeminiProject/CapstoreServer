@@ -83,18 +83,9 @@ public class CustomerNotFoundException extends Exception{
 		return super.equals(obj);
 	}
 
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
-	}
+	
 
-	@Override
-	protected void finalize() throws Throwable {
-		// TODO Auto-generated method stub
-		super.finalize();
-	}
-
+	
 	public CustomerNotFoundException() {
 		super();
 		// TODO Auto-generated constructor stub

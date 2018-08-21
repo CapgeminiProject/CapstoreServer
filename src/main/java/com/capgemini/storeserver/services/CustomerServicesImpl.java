@@ -228,13 +228,14 @@ public class CustomerServicesImpl implements CustomerServices {
 	public void buyNowCart(String phoneNumber) throws ProductUnavailableException {
 		Customer customer = customerRepo.getOne(phoneNumber);
 		Cart cart = cartRepo.findByCustomer(customer);
+		String error="This quantity of the product is unavailable";
 		List<Product> products = cart.getProducts();
 		for (Product product : products) {
 			if(product.getProductQuantityAvailable()>product.getCartQuantity())
 			{
 				product.setProductQuantityAvailable(product.getProductQuantityAvailable()-product.getCartQuantity());
 			}
-			else throw new ProductUnavailableException("This quantity of the product is unavailable");
+			else throw new ProductUnavailableException(error);
 		}
 
 	}
@@ -414,7 +415,7 @@ public class CustomerServicesImpl implements CustomerServices {
 			productsList.add(product);
 			wishlist.setProducts(productsList);
 			wishlistRepo.save(wishlist);
-			return true;
+			
 		}
 		else
 		{
@@ -423,8 +424,9 @@ public class CustomerServicesImpl implements CustomerServices {
 			productsList.add(product);
 			wishlist.setProducts(productsList);
 			wishlistRepo.save(wishlist);
-			return true;
+			
 		}
+		return true;
 	}
 	@Override
 	public boolean removeProductFromWishlist(String phoneNumber,int productId) throws InvalidInputException {
@@ -489,6 +491,7 @@ public class CustomerServicesImpl implements CustomerServices {
 	@Override
 	public Cart addProductToNewCart(String phoneNumber,int productId, int quantity) throws ProductUnavailableException {
 		Product product= productRepo.getOne(productId);
+		String error="This quantity of the product is not available";
 		if(product.getProductQuantityAvailable()>quantity)
 		{
 			Cart cart = new Cart();
@@ -503,7 +506,7 @@ public class CustomerServicesImpl implements CustomerServices {
 			return cartRepo.save(cart);
 		}
 		else 
-			throw new ProductUnavailableException("This quantity of the product is unavailable");
+			throw new ProductUnavailableException(error);
 	}
 
 	@Override
@@ -511,6 +514,7 @@ public class CustomerServicesImpl implements CustomerServices {
 		Customer customer=customerRepo.getOne(phoneNumber);
 		//System.out.println(customer.getCustomerName());
 		Cart cart = cartRepo.findByCustomer(customer);
+		String error="This quantity of the product is not Available";
 		System.out.println(cart);
 		List<Product> products =cart.getProducts();
 		System.out.println(products);
@@ -539,7 +543,7 @@ public class CustomerServicesImpl implements CustomerServices {
 			products.set(productIndex, product);
 			cart.setProducts(products);
 			return cartRepo.save(cart);}
-		else throw new ProductUnavailableException("This quantity of the product is unavailable");
+		else throw new ProductUnavailableException(error);
 	}
 
 	@Override
