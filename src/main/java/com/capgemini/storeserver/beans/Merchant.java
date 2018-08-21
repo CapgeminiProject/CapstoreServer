@@ -21,10 +21,7 @@ public class Merchant {
 	@OneToMany(mappedBy="merchant",cascade=CascadeType.ALL)
 	private List<Product> products = new ArrayList<Product>();
 	private Date addMerchantDate;
-	/*@ManyToOne
-	@JoinColumn(name="merchantId")
-	private Merchant merchant;*/
-//	private String username;
+	
 	private String password;
 	private String email;
 	private String phoneNumber;
@@ -47,24 +44,7 @@ public class Merchant {
 		this.merchantId = merchantId;
 	}
 
-	public Merchant(boolean isThirdPartyMerchant, List<Product> products, Date addMerchantDate, String password,
-			String email, String phoneNumber, Date removeMerchantDate, String merchantName, String merchantStatus,
-			String securityQuestion, String securityAnswer, Admin admin, Orders order) {
-		super();
-		this.isThirdPartyMerchant = isThirdPartyMerchant;
-		this.products = products;
-		this.addMerchantDate = addMerchantDate;
-		this.password = password;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.removeMerchantDate = removeMerchantDate;
-		this.merchantName = merchantName;
-		this.merchantStatus = merchantStatus;
-		this.securityQuestion = securityQuestion;
-		this.securityAnswer = securityAnswer;
-		this.admin = admin;
-		this.order = order;
-	}
+	
 	public Date getRemoveMerchantDate() {
 		return removeMerchantDate;
 	}

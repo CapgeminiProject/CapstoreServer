@@ -33,20 +33,7 @@ public class Customer {
 		super();
 	}
 
-	public Customer(List<Address> address, String email, String password, String cardNumber, String securityQuestion,
-			String securityAnswer, List<Review> reviews, List<Orders> orders, String customerName) {
-		super();
-		this.address = address;
-		this.email = email;
-		this.password = password;
-		this.cardNumber = cardNumber;
-		this.securityQuestion = securityQuestion;
-		this.securityAnswer = securityAnswer;
-		this.reviews = reviews;
-		this.orders = orders;
-		this.customerName = customerName;
-	}
-
+	
 	public List<Review> getReviews() {
 		return reviews;
 	}

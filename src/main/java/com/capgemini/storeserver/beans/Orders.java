@@ -41,24 +41,7 @@ public class Orders {
 		super();
 	}
 
-	public Orders(List<Product> products, int userId, double totalAmount, String deliveryStatus,
-			boolean statusOfTransaction, String modeOfPurchase, List<Merchant> merchant, Date elligibleReturnDate,
-			Date orderPlacedOn, Customer customer, boolean refundRequest, Date refundRequestDate) {
-		super();
-		this.products = products;
-		this.userId = userId;
-		this.totalAmount = totalAmount;
-		this.deliveryStatus = deliveryStatus;
-		this.statusOfTransaction = statusOfTransaction;
-		this.modeOfPurchase = modeOfPurchase;
-		this.merchant = merchant;
-		this.elligibleReturnDate = elligibleReturnDate;
-		this.orderPlacedOn = orderPlacedOn;
-		this.customer = customer;
-		this.refundRequest = refundRequest;
-		this.refundRequestDate = refundRequestDate;
-	}
-
+	
 	public Date getRefundRequestDate() {
 		return refundRequestDate;
 	}

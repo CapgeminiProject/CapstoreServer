@@ -20,10 +20,6 @@ public class Review {
 	@JoinColumn(name="phoneNumber")
 	private Customer customer;//many to one
 	private int productRating;
-	/*@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="merchantId")
-	private Merchant merchant;//one to one
-	*/
 	
 	
 	public Review() {
@@ -66,12 +62,7 @@ public class Review {
 	public void setProductRating(int productRating) {
 		this.productRating = productRating;
 	}
-	/*public Merchant getMerchant() {
-		return merchant;
-	}
-	public void setMerchant(Merchant merchant) {
-		this.merchant = merchant;
-	}*/
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -56,12 +56,7 @@ public class Coupon {
 	public void setCouponEndDate(Date couponEndDate) {
 		this.couponEndDate = couponEndDate;
 	}
-	/*public int getProductId() {
-		return productId;
-	}
-	public void setProductId(int productId) {
-		this.productId = productId;
-	}*/
+	
 	public String getCouponName() {
 		return couponName;
 	}
