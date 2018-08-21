@@ -77,19 +77,7 @@ public class Admin {
 		result = prime * result + adminId;
 		return result;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Admin other = (Admin) obj;
-		if (adminId != other.adminId)
-			return false;
-		return true;
-	}
+	
 	
 	
 	

@@ -71,19 +71,7 @@ public int hashCode() {
 	return result;
 }
 
-@Override
-public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (getClass() != obj.getClass())
-		return false;
-	Category other = (Category) obj;
-	if (categoryId != other.categoryId)
-		return false;
-	return true;
-}
+
 
 
 }

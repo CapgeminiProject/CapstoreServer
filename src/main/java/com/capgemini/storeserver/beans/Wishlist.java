@@ -50,19 +50,7 @@ public class Wishlist {
 		result = prime * result + wishListId;
 		return result;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Wishlist other = (Wishlist) obj;
-		if (wishListId != other.wishListId)
-			return false;
-		return true;
-	}
+	
 	
 	
 	

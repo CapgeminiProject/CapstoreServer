@@ -135,19 +135,6 @@ public class Merchant {
 		result = prime * result + merchantId;
 		return result;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Merchant other = (Merchant) obj;
-		if (merchantId != other.merchantId)
-			return false;
-		return true;
-	}
 	
 	
 	
