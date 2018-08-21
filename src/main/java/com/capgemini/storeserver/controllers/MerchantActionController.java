@@ -39,7 +39,7 @@ public class MerchantActionController {
 		try {
 			id = merchantService.addProduct(product);
 		} catch (ProductNotFoundException e) {
-			e.printStackTrace();
+			
 		}
 		return id;
 	}
@@ -62,7 +62,7 @@ public class MerchantActionController {
 		try {
 			merchantService.updateProduct(product);
 		} catch (ProductNotFoundException e) {
-			e.printStackTrace();
+			
 		}
 		return product;
 	}
@@ -107,7 +107,7 @@ public class MerchantActionController {
 			}
 		} 
 		catch (MerchantNotFoundException e) {
-			e.printStackTrace();
+			
 			return null;
 			
 		}
